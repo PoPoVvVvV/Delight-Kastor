@@ -1,206 +1,326 @@
-/* Couleurs pour le thème sombre */
-:root {
-    --dark-bg: #1e1e1e;
-    --dark-surface: #2d2d2d;
-    --dark-border: #555;
-    --light-text: #f0f0f0;
-    --medium-text: #b0b0b0;
-    --accent-green: #4CAF50;
-    --accent-green-dark: #45a049;
-    --error-red: #f44336; /* Couleur pour les messages d'erreur */
-}
-
+/*
+====================================
+SECTION: STYLES GÉNÉRAUX ET BODY
+Ceci concerne l'ensemble de la page (fond, police de caractères, etc.).
+====================================
+*/
 body {
-    font-family: sans-serif;
-    margin-bottom: 80px; /* Add space at the bottom for the fixed button */
-    padding: 20px; /* Add some padding around content */
-    background-color: var(--dark-bg); /* Fond sombre */
-    color: var(--light-text); /* Texte clair */
-    /* Centering the login screen if needed, or hiding the main content */
-    display: flex; /* Use flexbox for centering login screen */
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Minimum height to center vertically */
+    font-family: Arial, sans-serif; /* Police de caractères standard */
+    margin: 0; /* Supprime la marge par défaut du navigateur */
+    padding: 0; /* Supprime le rembourrage par défaut du navigateur */
+    background-color: #1a1a1a; /* Fond sombre pour toute la page */
+    color: #f0f0f0; /* Couleur du texte clair pour contraster avec le fond sombre */
+    display: flex; /* Utilisation de flexbox pour centrer le contenu de connexion */
+    justify-content: center; /* Centre horizontalement le contenu */
+    align-items: center; /* Centre verticalement le contenu */
+    min-height: 100vh; /* Assure que le corps prend au moins toute la hauteur de la fenêtre */
+    /* Ajout pour permettre le défilement si le contenu dépasse la hauteur de l'écran */
+    overflow-y: auto;
 }
 
-/* Hide the main content initially */
-#sales-book-content {
-    display: none;
-    width: 100%; /* Take full width when visible */
-    max-width: 1000px; /* Max width for the table layout */
-     margin: 0 auto; /* Center the content */
-}
-
-
-/* --- Login Screen Styles --- */
+/*
+====================================
+SECTION: ÉCRAN DE CONNEXION (#login-screen)
+Styles spécifiques pour la boîte de connexion visible au démarrage.
+====================================
+*/
 #login-screen {
-    display: block; /* Show login screen by default */
-    width: 100%;
-    max-width: 400px; /* Limit login form width */
-    padding: 20px;
-    background-color: var(--dark-surface); /* Same as table cells */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    color: var(--light-text);
+    /* Par défaut, display: flex pour centrer le contenu comme défini dans le body */
+    /* Sera géré par JavaScript pour cacher/afficher */
+    background-color: #222; /* Fond légèrement plus clair pour la boîte de connexion elle-même */
+    padding: 30px; /* Espace intérieur */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Ombre pour donner un effet de profondeur */
+    text-align: center; /* Centre le texte et les éléments dans le conteneur */
+    width: 300px; /* Largeur fixe pour la boîte de connexion */
 }
 
 .login-container h2 {
-    text-align: center;
-    color: var(--light-text);
-    margin-bottom: 20px;
+    color: #e0e0e0; /* Couleur du titre de connexion */
+    margin-bottom: 20px; /* Marge sous le titre */
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* Espace sous chaque groupe de formulaire (label + input) */
+    text-align: left; /* Alignement du texte à gauche pour les labels */
 }
 
 .form-group label {
-    display: block; /* Label on its own line */
-    margin-bottom: 5px;
-    color: var(--medium-text);
+    display: block; /* Force le label à prendre toute la largeur disponible */
+    margin-bottom: 5px; /* Petite marge sous le label */
+    color: #ccc; /* Couleur du texte du label */
 }
 
 .form-group input[type="text"],
 .form-group input[type="password"] {
-    width: calc(100% - 12px); /* Full width minus padding */
-    padding: 8px;
-    background-color: #444;
-    color: var(--light-text);
-    border: 1px solid var(--dark-border);
-    border-radius: 4px;
+    width: calc(100% - 20px); /* Largeur de 100% moins le padding */
+    padding: 10px; /* Rembourrage intérieur */
+    border: 1px solid #555; /* Bordure discrète */
+    border-radius: 4px; /* Coins légèrement arrondis */
+    background-color: #444; /* Fond plus foncé pour les champs de saisie */
+    color: #f0f0f0; /* Texte clair dans les champs */
 }
 
-#login-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: var(--accent-green);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
+.login-container button {
+    background-color: #007bff; /* Couleur de fond du bouton de connexion */
+    color: white; /* Texte blanc sur le bouton */
+    padding: 10px 15px; /* Rembourrage du bouton */
+    border: none; /* Pas de bordure */
+    border-radius: 4px; /* Coins arrondis */
+    cursor: pointer; /* Curseur en forme de main au survol */
+    font-size: 16px; /* Taille de la police */
+    width: 100%; /* Bouton prend toute la largeur */
+    margin-top: 10px; /* Marge au-dessus du bouton */
 }
 
-#login-form button:hover {
-    background-color: var(--accent-green-dark);
+.login-container button:hover {
+    background-color: #0056b3; /* Changement de couleur au survol */
 }
 
 .error-message {
-    color: var(--error-red);
-    text-align: center;
-    margin-top: 15px;
-    min-height: 1em; /* Reserve space even if empty */
+    color: #ff4d4d; /* Couleur rouge pour les messages d'erreur */
+    margin-top: 10px; /* Marge au-dessus */
+    font-size: 0.9em; /* Taille de police légèrement plus petite */
 }
 
-.security-warning {
-    font-size: 0.8em;
-    color: #ff9800; /* Orange warning color */
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px dashed #ff9800;
-    border-radius: 5px;
+/*
+====================================
+SECTION: CONTENU PRINCIPAL DU CARNET DE VENTE (#sales-book-content)
+Masqué par default, affiché par JavaScript après connexion.
+====================================
+*/
+#sales-book-content {
+    /* Initialement masqué par un style inline dans le HTML et géré par JS */
+    /* Lorsque visible, il s'adapte au flux normal du document */
+    padding: 20px; /* Rembourrage autour de tout le contenu du carnet */
+    width: 100%; /* Prend toute la largeur disponible */
+    max-width: 100%; /* S'assure qu'il ne dépasse pas 100% de la largeur du parent */
+    box-sizing: border-box; /* S'assure que padding n'augmente pas la largeur totale */
+    margin-left: auto; /* Centre le contenu en largeur si la largeur est inférieure à 100% */
+    margin-right: auto; /* Centre le contenu en largeur si la largeur est inférieure à 100% */
+    margin-top: -10px; /* NOUVEAU : Remonte le contenu de 10 pixels. Change à -20px pour plus. */
 }
 
+/* NOUVEAUX STYLES POUR LE LOGO ET LE TITRE PRINCIPAL */
+.header-main-title {
+    display: flex; /* Active Flexbox pour aligner le logo et le titre */
+    align-items: center; /* Centre verticalement le logo et le titre */
+    justify-content: center; /* Centre horizontalement le bloc entier */
+    margin-bottom: 30px; /* Marge sous le bloc logo+titre */
+    gap: 15px; /* Espace entre le logo et le titre */
+}
 
-/* --- Existing Sales Book Styles (adjusted for dark theme) --- */
+.delight-logo {
+    height: 66px; /* Hauteur fixe pour le logo (60px + 10%) */
+    width: auto; /* Maintient le ratio d'aspect */
+}
+
 h1 {
-    color: var(--light-text); /* Titre clair */
-    text-align: center; /* Center the title */
-    margin-bottom: 20px;
+    /* text-align: center;  Déplacé vers .header-main-title pour le bloc entier */
+    color: #e0e0e0; /* Couleur du titre */
+    margin: 0; /* Réinitialise la marge par défaut du h1 pour un meilleur alignement avec flexbox */
+    font-size: 2.5em; /* Ajuste la taille si tu veux */
 }
 
+/*
+====================================
+SECTION: TABLES GÉNÉRALES ET DE BASE
+Styles pour les tableaux, incluant l'en-tête commune.
+====================================
+*/
 table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
-    border: 1px solid var(--dark-border); /* Bordure de table plus claire pour visibilité */
+    width: 100%; /* Les tableaux prennent toute la largeur disponible */
+    border-collapse: collapse; /* Fusionne les bordures des cellules */
+    margin-bottom: 20px; /* Espace sous chaque tableau */
+    background-color: #2a2a2a; /* Fond sombre pour les tableaux */
+    color: #f0f0f0; /* Texte clair dans les tableaux */
 }
 
-th, td {
-    border: 1px solid var(--dark-border); /* Bordures de cellules plus claires */
-    padding: 8px;
-    text-align: left;
-    color: var(--light-text); /* Texte clair dans les cellules */
-    background-color: var(--dark-surface); /* Fond des cellules légèrement plus clair que le body */
+table thead {
+    background-color: #3a3a3a; /* Fond plus foncé pour l'en-tête du tableau */
 }
 
-th {
-    background-color: #3a3a3a; /* Fond des en-têtes plus distinct */
-    font-weight: bold;
+table th,
+table td {
+    border: 1px solid #444; /* Bordure des cellules */
+    padding: 10px; /* Rembourrage intérieur des cellules */
+    text-align: left; /* Alignement du texte à gauche */
 }
 
- /* Alternating row colors for better readability */
-tbody tr:nth-child(even) td {
-    background-color: #333; /* Fond des lignes paires légèrement différent */
+table th {
+    font-weight: bold; /* Texte en gras pour les en-têtes de colonne */
+    color: #ccc; /* Couleur légèrement plus claire pour les en-têtes */
 }
 
-.total {
-    font-weight: bold;
-     background-color: #4a4a4a; /* Fond plus sombre pour la ligne total */
-     color: var(--light-text);
+#salesperson-name {
+    text-align: center; /* CHANGEMENT ICI : Aligne le nom du vendeur au centre */
+    font-style: italic; /* Texte en italique */
+    color: #a0a0a0; /* Couleur plus discrète pour le nom du vendeur */
 }
 
-/* Style for inputs and selects within the table */
-td input[type="number"],
-td select { /* Target inputs/selects specifically within table cells */
-    background-color: #444; /* Fond sombre pour les champs */
-    color: var(--light-text); /* Texte clair dans les champs */
-    border: 1px solid var(--dark-border); /* Bordure claire */
-    padding: 5px;
-    border-radius: 3px;
-    width: auto; /* Allow inputs to size according to content */
+/*
+====================================
+SECTION: MISE EN PAGE DES CARNETS EN LIGNES (FLEXBOX)
+Utilise Flexbox pour aligner les carnets côte à côte.
+====================================
+*/
+.carnet-row {
+    display: flex; /* Active Flexbox pour les éléments de cette ligne */
+    gap: 20px; /* Espace entre les carnets (flex items) */
+    margin-bottom: 20px; /* Espace sous chaque ligne de carnets */
+    flex-wrap: wrap; /* Permet aux carnets de passer à la ligne sur de petits écrans */
 }
 
-td select option {
-    background-color: #444; /* Fond sombre pour les options */
-    color: var(--light-text); /* Texte clair pour les options */
+.carnet-row .carnet {
+    flex: 1; /* Chaque carnet prend une part égale de l'espace disponible */
+    min-width: 48%; /* Permet à 2 carnets de tenir côte à côte avec un peu d'espace */
+    box-sizing: border-box; /* S'assure que padding et border n'augmentent pas la largeur */
+    /* Les styles existants pour .carnet sont toujours appliqués */
 }
 
 
-/* Style for the button container */
+/*
+====================================
+SECTION: STYLES DES CARNETS INDIVIDUELS
+Styles appliqués aux div avec la classe 'carnet' (Menus, Plats, Desserts, Boissons).
+====================================
+*/
+.carnet {
+    border: 1px solid #333; /* Bordure pour le bloc du carnet */
+    border-radius: 8px; /* Coins arrondis du bloc */
+    padding: 20px; /* Espacement intérieur du bloc */
+    background-color: #222; /* Fond légèrement plus clair que le body pour le carnet */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre pour un effet de profondeur */
+}
+
+.carnet h2 {
+    color: #e0e0e0; /* Couleur du titre de la catégorie (ex: "Menus") */
+    border-bottom: 2px solid #555; /* Ligne de séparation sous le titre */
+    padding-bottom: 10px; /* Espacement sous la ligne */
+    margin-bottom: 20px; /* Espacement sous le titre et la ligne */
+    text-align: center; /* Centrer le titre du carnet */
+}
+
+/* Les tables à l'intérieur des carnets peuvent hériter des styles de 'table' ou avoir des ajustements */
+.carnet table {
+    margin-bottom: 0; /* Pas de marge en bas si la table est le dernier élément du carnet */
+}
+
+/*
+====================================
+SECTION: STYLES DES ÉLÉMENTS DE FORMULAIRE DANS LES TABLES
+(Selects, Inputs de quantité, affichage des prix/montants/profits)
+====================================
+*/
+.product-select,
+.quantity-input {
+    width: 100%; /* Prend toute la largeur disponible dans la cellule */
+    padding: 8px; /* Rembourrage intérieur */
+    border: 1px solid #555; /* Bordure */
+    border-radius: 4px; /* Coins arrondis */
+    background-color: #444; /* Fond foncé */
+    color: #f0f0f0; /* Texte clair */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+.quantity-input {
+    text-align: center; /* Centre le texte dans le champ quantité */
+}
+
+.product-prod-price,
+.product-sell-price,
+.row-amount,
+.row-profit {
+    font-weight: bold; /* Texte en gras pour les prix, montants et profits */
+    /* Les couleurs spécifiques pourraient être ajoutées ici si nécessaire */
+}
+
+/*
+====================================
+SECTION: STYLES DES TOTAUX ET PIED DE TABLE
+Concerne la ligne "Total à facturer" et "Total Profit".
+====================================
+*/
+table tfoot td.total {
+    font-weight: bold; /* Texte en gras */
+    text-align: center; /* Aligne les totaux au centre */
+    background-color: #3a3a3a; /* Fond plus foncé pour la ligne des totaux */
+    color: #e0e0e0; /* Couleur du texte des totaux */
+}
+
+/* Assure que la table des totaux a un espace suffisant */
+#sales-book-content > table:last-of-type {
+    margin-top: 20px; /* Marge au-dessus de la table des totaux */
+}
+
+/*
+====================================
+SECTION: INFOS SUPPLÉMENTAIRES ET BOUTON DE VALIDATION
+Concerne la checkbox de réduction, la date/heure et le bouton.
+====================================
+*/
+.info-container {
+    display: flex; /* Utilise flexbox pour aligner les éléments */
+    justify-content: flex-end; /* Aligne les éléments à droite */
+    align-items: center; /* Centre verticalement les éléments */
+    gap: 15px; /* Espace entre les éléments */
+    margin-top: 20px; /* Garde la marge au-dessus du conteneur d'infos */
+    margin-bottom: 10px; /* Réduit la marge en dessous du conteneur d'infos */
+    font-size: 0.9em; /* Taille de police légèrement plus petite */
+    color: #ccc; /* Couleur du texte */
+}
+
+.info-container input[type="checkbox"] {
+    width: 20px; /* Largeur de la checkbox */
+    height: 20px; /* Hauteur de la checkbox */
+    cursor: pointer; /* Curseur en forme de main */
+    vertical-align: middle; /* Alignement vertical pour la checkbox */
+}
+
 .button-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-.button-container button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: var(--accent-green);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-}
-.button-container button:hover {
-    background-color: var(--accent-green-dark);
+    text-align: center; /* Centrer le bouton de validation */
+    margin-top: 10px; /* Réduit la marge au-dessus du bouton de 20px à 10px */
 }
 
- /* Style for the date/time/check container */
- .info-container {
-     margin-top: 10px;
-     text-align: right;
-     font-size: 0.9em;
-     color: var(--medium-text);
- }
+#validate-button {
+    background-color: #28a745; /* Couleur verte pour le bouton de validation */
+    color: white; /* Texte blanc */
+    padding: 12px 25px; /* Rembourrage */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Curseur en forme de main */
+    font-size: 1.1em; /* Taille de police légèrement plus grande */
+    transition: background-color 0.3s ease; /* Transition douce pour le survol */
+}
 
- .info-container span {
-     margin-left: 15px;
- }
+#validate-button:hover {
+    background-color: #218838; /* Changement de couleur au survol */
+}
 
- .info-container label[for="discount-checkbox"] {
-    display: inline-block;
-    margin-right: 5px;
-    font-weight: normal;
-    color: var(--light-text);
- }
+#validate-button:disabled {
+    background-color: #555; /* Couleur quand le bouton est désactivé */
+    cursor: not-allowed; /* Curseur 'interdit' */
+}
 
- .info-container input[type="checkbox"] {
-    vertical-align: middle;
-    margin-right: 15px;
- }
+/*
+====================================
+MEDIA QUERIES POUR LA RESPONSIVITÉ
+Ajustements pour les petits écrans
+====================================
+*/
+@media (max-width: 900px) {
+    .carnet-row {
+        flex-direction: column; /* Sur petits écrans, les carnets s'empilent */
+        align-items: center; /* Centrer les carnets empilés */
+    }
+
+    .carnet-row .carnet {
+        width: 100%; /* Les carnets prennent toute la largeur disponible */
+        min-width: unset; /* Supprime la largeur minimale pour permettre l'adaptation */
+    }
+
+    .header-main-title {
+        flex-direction: column; /* Empile le logo et le titre sur petits écrans */
+        text-align: center; /* Centre le texte si empilé */
+    }
+}
