@@ -112,14 +112,23 @@ function initializeSalesBook() {
         const amount = sellPrice * quantity;
         const profit = (sellPrice - prodPrice) * quantity;
 
-        // Update displayed prices only if a product is selected
-        if (productSelect.value) {
-            productProdPriceDisplay.textContent = `$${prodPrice.toFixed(2)}`;
-            productSellPriceDisplay.textContent = `$${sellPrice.toFixed(2)}`;
-        } else {
-            productProdPriceDisplay.textContent = ''; // Clear if no product selected
-            productSellPriceDisplay.textContent = ''; // Clear if no product selected
+        // --- DÉBUT DES MODIFICATIONS POUR MASQUER LES PRIX DE PRODUCTION ET DE VENTE UNITAIRE ---
+
+        // Masque le prix de production
+        if (productProdPriceDisplay) {
+            productProdPriceDisplay.textContent = ''; // Vide le contenu de l'affichage du prix de production
+            // Si tu souhaites masquer complètement la cellule (<td>) dans le tableau, tu peux ajouter :
+            // productProdPriceDisplay.style.display = 'none';
         }
+
+        // Masque le prix de vente unitaire
+        if (productSellPriceDisplay) {
+            productSellPriceDisplay.textContent = ''; // Vide le contenu de l'affichage du prix de vente unitaire
+            // Si tu souhaites masquer complètement la cellule (<td>) dans le tableau, tu peux ajouter :
+            // productSellPriceDisplay.style.display = 'none';
+        }
+
+        // --- FIN DES MODIFICATIONS ---
 
         rowAmountDisplay.textContent = `$${amount.toFixed(2)}`;
         rowProfitDisplay.textContent = `$${profit.toFixed(2)}`; // KEEP: Update row profit display
@@ -324,12 +333,12 @@ function initializeSalesBook() {
                 const discordPayload = {
                     // Vous pouvez personnaliser le format du message ici en utilisant le Markdown
                     content: `**Nouvelle Vente Validée**:\n` +
-                                    `> **Date:** ${summaryData.Date}\n` +
-                                    `> **Heure:** ${summaryData.Heure}\n` +
-                                    `> **Vendeur:** ${summaryData.Vendeur}\n` +
-                                    `> **Chiffre d'Affaire:** $${summaryData.Chiffre_Affaire.toFixed(2)}\n` +
-                                    `> **Marge Totale:** $${summaryData.Marge_Totale.toFixed(2)}` +
-                                    productListString, // AJOUT : Les détails des produits ici
+                                        `> **Date:** ${summaryData.Date}\n` +
+                                        `> **Heure:** ${summaryData.Heure}\n` +
+                                        `> **Vendeur:** ${summaryData.Vendeur}\n` +
+                                        `> **Chiffre d'Affaire:** $${summaryData.Chiffre_Affaire.toFixed(2)}\n` +
+                                        `> **Marge Totale:** $${summaryData.Marge_Totale.toFixed(2)}` +
+                                        productListString, // AJOUT : Les détails des produits ici
                     // Optional: customize the username and avatar
                     // username: 'Sales Bot',
                     // avatar_url: 'URL_DE_VOTRE_ICONE'
@@ -410,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Retirons la vérification de sessionStorage. La page montrera toujours l'écran de login au départ.
     if (isLoggedIn === 'true') {
         showSalesBook();
-          initializeSalesBook();
+        initializeSalesBook();
     } else {
         // Afficher l'écran de login (il est déjà affiché par défaut via CSS)
         // Mettre le focus sur le champ nom d'utilisateur
